@@ -1,6 +1,7 @@
 package ku.atm;
 
 import io.cucumber.java.Before;
+import io.cucumber.java.de.Wenn;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -54,6 +55,12 @@ public class StepDefATM {
         assertThrows(NotEnoughBalanceException.class,
                 () -> atm.withdraw(amount));
     }
+
+    @When("I deposit {float} to ATM")
+    public void i_deposit_to_ATM(float amount) {
+       atm.deposit(amount);
+    }
+
     @Then("my account balance is {float}")
     public void my_account_balance_is(double balance) {
         assertEquals(balance, atm.getBalance());
@@ -69,5 +76,4 @@ public class StepDefATM {
         assertEquals(balance,
                      bank.getCustomer(id).getAccount().getBalance());
     }
-
 }
